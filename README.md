@@ -11,4 +11,4 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 >>>>>>> 2ff0aa1 (add: initial files)
 
-passwordgenerator application link : passwordgenerator-sattu.vercel.app
+passwordgenerator application link : https://passwordgenerator-sattu.vercel.app/
