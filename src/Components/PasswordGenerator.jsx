@@ -4,11 +4,11 @@ import "./PasswordGenerator.css";
 export const PasswordGenerator = () => {
   // now write a logic to build the password generator function that build the generate the password :
 
-  let [numbers, setNumbers] = useState(false);
-  let [symbols, setSymbols] = useState(false);
+  let [numbers, setNumbers] = useState(true);
+  let [symbols, setSymbols] = useState(true);
   let [uppercase, setUppercase] = useState(false);
   let [lowercase, setLowercase] = useState(false);
-  let [length, setLength] = useState(10);
+  let [length, setLength] = useState(6);
   let [password, setPassword] = useState("");
   let [disabled, setDisabled] = useState(false);
   // let [check, setCheck] = useState(false);
@@ -26,10 +26,10 @@ export const PasswordGenerator = () => {
 
   const copy = () => {
     passwordRef.current?.select();
-    passwordRef.current?.setSelectionRange(0, 8);
+    // passwordRef.current?.setSelectionRange(0, 8);
     let passwordTrim = passwordRef.current?.value.slice(0, 8);
 
-    window.navigator.clipboard.writeText(passwordTrim);
+    window.navigator.clipboard.writeText( passwordTrim);
   };
   const passwordGenerator = () => {
     let pass = "";
@@ -70,15 +70,19 @@ export const PasswordGenerator = () => {
       <div className="first-child">
         <form action="">
           <input type="text" readOnly value={password} ref={passwordRef} />
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              passwordGenerator();
-            }}
-          >
-            Reset
-          </button>
-        </form>
+          </form>
+          <div>
+            <button
+              className="reset-button"
+              onClick={(e) => {
+                e.preventDefault();
+                passwordGenerator();
+              }}
+            >
+              Reset
+            </button>
+          </div>
+    
       </div>
       <div className="secound-child">
         <h1>Customize your password</h1>
@@ -86,83 +90,56 @@ export const PasswordGenerator = () => {
           <label htmlFor="">Password Length</label>
           <div className="secound-child-password-length">
             <input
+            className="password-input"
               type="number"
               value={length}
               onChange={(e) => setLength(e.target.value)}
             />
             <input
+            className="input-range"
               type="range"
-              min={8}
-              max={20}
+              min={4}
+              max={12}
               value={length}
               onChange={(e) => setLength(e.target.value)}
             />
           </div>
 
           <div className="secound-child-option">
-            <div className="secound-child-first-option">
-              <input
-                type="radio"
-                name="option"
-                // checked={check}
-                onChange={() => {
-                  setLowercase(true);
-                  setUppercase(true);
-                  setDisabled(true);
-                }}
-              />
-              Easy to say <br />
-              <input
-                type="radio"
-                name="option"
-                onChange={() => {
-                  setLowercase(true);
-                  setUppercase(true);
-                  setDisabled(false);
-                  setNumbers(true);
-                  setSymbols(true);
-                }}
-              />
-              Easy to read <br />
-              <input type="radio" name="option" />
-              All characters <br />
-            </div>
             <div className="secound-child-secound-option">
-              <input
-                type="checkbox"
-                checked={uppercase}
-                onChange={() => setUppercase(!uppercase)}
-              />
-              Uppercase <br />
-              <input
-                type="checkbox"
-                checked={lowercase}
-                onChange={() => setLowercase(!lowercase)}
-              />
-              Lowercase <br />
-              <input
-                type="checkbox"
-                disabled={disabled}
-                checked={numbers}
-                value={numbers}
-                onChange={() => setNumbers(!numbers)}
-              />
-              Numbers <br />
-              <input
-                type="checkbox"
-                disabled={disabled}
-                value={symbols}
-                checked={symbols}
-                onChange={() => setSymbols(!symbols)}
-              />
-              Symbols <br />
+              <div>
+                {" "}
+                <input
+                  type="checkbox"
+                  disabled={disabled}
+                  checked={numbers}
+                  value={numbers}
+                  onChange={() => setNumbers(!numbers)}
+                />
+                {""} Numbers <br />
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  disabled={disabled}
+                  value={symbols}
+                  checked={symbols}
+                  onChange={() => setSymbols(!symbols)}
+                />{" "}
+                Symbols <br />
+              </div>
             </div>
           </div>
         </form>
       </div>
       <div className="third-child">
         {/* <button onClick={copy}>Copy Password</button> */}
-        <input type="button" value={"copy"} onClick={copy} />
+        <input
+          className="copy-button"
+          type="button"
+          value={"Copy"}
+          onClick={copy}
+        />
       </div>
     </div>
   );
