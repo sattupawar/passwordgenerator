@@ -42,10 +42,8 @@ export const PasswordGenerator = () => {
     // here write a for loop to generate the password generator  :
 
     for (let i = 1; i <= length; i++) {
-      if (length < 13) {
-        let random = Math.floor(Math.random() * fullStr.length + 1);
-        pass += fullStr.charAt(random);
-      }
+      let random = Math.floor(Math.random() * fullStr.length + 1);
+      pass += fullStr.charAt(random);
     }
     setPassword(pass);
   }, [length, numbers, symbols]);
@@ -56,6 +54,7 @@ export const PasswordGenerator = () => {
     passwordGenerator();
   }, [length, numbers, symbols]);
 
+ 
   return (
     <div className="parent">
       <div className="first-child">
@@ -92,8 +91,9 @@ export const PasswordGenerator = () => {
               min={4}
               max={12}
               value={length}
+              step={1}
               onChange={(e) => setLength(e.target.value)}
-            />
+             />
           </div>
 
           <div className="secound-child-option">
