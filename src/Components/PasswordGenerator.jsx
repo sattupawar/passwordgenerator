@@ -6,20 +6,10 @@ export const PasswordGenerator = () => {
 
   let [numbers, setNumbers] = useState(true);
   let [symbols, setSymbols] = useState(true);
-  let [uppercase, setUppercase] = useState(false);
-  let [lowercase, setLowercase] = useState(false);
+
   let [length, setLength] = useState(6);
   let [password, setPassword] = useState("");
   let [disabled, setDisabled] = useState(false);
-  // let [check, setCheck] = useState(false);
-  // let [character, setCharacter] = useState(true);
-
-  // if (character) {
-  //   setUppercase(true);
-  //   setLowercase(true);
-  //   setNumbers(true);
-  //   setSymbols(true);
-  // }
 
   // create a reference :
   let passwordRef = useRef(null);
@@ -29,25 +19,17 @@ export const PasswordGenerator = () => {
     // passwordRef.current?.setSelectionRange(0, 8);
     let passwordTrim = passwordRef.current?.value.slice(0, 8);
 
-    window.navigator.clipboard.writeText( passwordTrim);
+    window.navigator.clipboard.writeText(passwordTrim);
   };
   const passwordGenerator = () => {
     let pass = "";
-    let fullStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let fullStr = "abcdefghijklmnopqrstuvwxyz";
 
     if (numbers) {
       fullStr += "0123456789";
     }
     if (symbols) {
       fullStr += "!@#$%^&*";
-    }
-    if (uppercase) {
-      fullStr += "";
-      fullStr + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    }
-    if (lowercase) {
-      fullStr + "";
-      fullStr + "abcdefghijklmnopqrstuvwxyz";
     }
 
     // here write a for loop to generate the password generator  :
@@ -70,19 +52,18 @@ export const PasswordGenerator = () => {
       <div className="first-child">
         <form action="">
           <input type="text" readOnly value={password} ref={passwordRef} />
-          </form>
-          <div>
-            <button
-              className="reset-button"
-              onClick={(e) => {
-                e.preventDefault();
-                passwordGenerator();
-              }}
-            >
-              Reset
-            </button>
-          </div>
-    
+        </form>
+        <div>
+          <button
+            className="reset-button"
+            onClick={(e) => {
+              e.preventDefault();
+              passwordGenerator();
+            }}
+          >
+            Reset
+          </button>
+        </div>
       </div>
       <div className="secound-child">
         <h1>Customize your password</h1>
@@ -90,13 +71,13 @@ export const PasswordGenerator = () => {
           <label htmlFor="">Password Length</label>
           <div className="secound-child-password-length">
             <input
-            className="password-input"
+              className="password-input"
               type="number"
               value={length}
               onChange={(e) => setLength(e.target.value)}
             />
             <input
-            className="input-range"
+              className="input-range"
               type="range"
               min={4}
               max={12}
