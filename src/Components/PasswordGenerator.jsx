@@ -10,6 +10,7 @@ export const PasswordGenerator = () => {
   let [length, setLength] = useState(6);
   let [password, setPassword] = useState("");
   let [disabled, setDisabled] = useState(false);
+  let [popup, setPopup] = useState(false);
 
   // create a reference :
   let passwordRef = useRef(null);
@@ -20,6 +21,11 @@ export const PasswordGenerator = () => {
     let passwordTrim = passwordRef.current?.value.slice(0, 8);
 
     window.navigator.clipboard.writeText(passwordTrim);
+
+    setPopup(true);
+    setTimeout(() => {
+      setPopup(false);
+    }, 1000);
   };
   const passwordGenerator = () => {
     let pass = "";
@@ -45,7 +51,7 @@ export const PasswordGenerator = () => {
 
   useEffect(() => {
     passwordGenerator();
-  }, [length, uppercase, lowercase, numbers, symbols]);
+  }, [length, numbers, symbols]);
 
   return (
     <div className="parent">
@@ -121,6 +127,7 @@ export const PasswordGenerator = () => {
           value={"Copy"}
           onClick={copy}
         />
+        {popup && <div className="popup">copied</div>}
       </div>
     </div>
   );
