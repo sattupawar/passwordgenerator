@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./PasswordGenerator.css";
+import { useCallback } from "react";
 
 export const PasswordGenerator = () => {
   // now write a logic to build the password generator function that build the generate the password :
@@ -15,7 +16,7 @@ export const PasswordGenerator = () => {
   // create a reference :
   let passwordRef = useRef(null);
 
-  const copy = () => {
+  const copy = useCallback(() => {
     passwordRef.current?.select();
     // passwordRef.current?.setSelectionRange(0, 8);
     let passwordTrim = passwordRef.current?.value.slice(0, 8);
@@ -26,8 +27,8 @@ export const PasswordGenerator = () => {
     setTimeout(() => {
       setPopup(false);
     }, 1000);
-  };
-  const passwordGenerator = () => {
+  }, [password]);
+  const passwordGenerator = useCallback(() => {
     let pass = "";
     let fullStr = "abcdefghijklmnopqrstuvwxyz";
 
@@ -45,7 +46,7 @@ export const PasswordGenerator = () => {
       pass += fullStr.charAt(random);
     }
     setPassword(pass);
-  };
+  }, [length, numbers, symbols]);
 
   //   now i want to use the useeffect so when i change the length automatically my password value also change and see the live:
 
