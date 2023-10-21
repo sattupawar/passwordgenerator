@@ -42,8 +42,10 @@ export const PasswordGenerator = () => {
     // here write a for loop to generate the password generator  :
 
     for (let i = 1; i <= length; i++) {
-      let random = Math.floor(Math.random() * fullStr.length + 1);
-      pass += fullStr.charAt(random);
+      if (length < 13) {
+        let random = Math.floor(Math.random() * fullStr.length + 1);
+        pass += fullStr.charAt(random);
+      }
     }
     setPassword(pass);
   }, [length, numbers, symbols]);
@@ -68,21 +70,22 @@ export const PasswordGenerator = () => {
               passwordGenerator();
             }}
           >
-            Reset
+            Refresh
           </button>
         </div>
       </div>
       <div className="secound-child">
         <h1>Customize your password</h1>
         <form action="">
-          <label htmlFor="">Password Length</label>
+          <label htmlFor="">Password Length : {length}</label>
           <div className="secound-child-password-length">
-            <input
+            {/* <input
               className="password-input"
               type="number"
               value={length}
               onChange={(e) => setLength(e.target.value)}
-            />
+            /> */}
+
             <input
               className="input-range"
               type="range"
